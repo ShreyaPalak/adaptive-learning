@@ -18,7 +18,7 @@ import requests
 logger = logging.getLogger("llm_gateway")
 
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
-DEFAULT_MODEL = os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+DEFAULT_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-20b")
 REQUEST_TIMEOUT_SECONDS = 30
 MAX_RETRIES = 2
 

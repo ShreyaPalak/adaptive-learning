@@ -101,8 +101,9 @@ def call_llm_json(prompt: str, *, model: str | None = None, max_tokens: int = 30
             time.sleep(min(2 ** attempt, 5))
             continue
         if resp.status_code >= 400:
-            logger.warning("llm_gateway client_error status=%s attempt=%s", resp.status_code, attempt)
-            raise GatewayError("The request to the AI service was invalid.")
+            logger.warning("llm_gateway client_error status=%s attempt=%s", resp.status_code, resp.text[:1000],)
+            raise GatewayError(f"The AI service rejected the request ({resp.status_code}). "
+        f"Details: {resp.text[:500]}")
 
         try:
             body = resp.json()
